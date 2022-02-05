@@ -26,6 +26,10 @@ namespace waproject.WebApi.Controllers
         public async Task<object> AuthSignIn([FromBody] SignInCredentials credentials)
         {
             IdentityUser user = await _userManager.FindByEmailAsync(credentials.Email);
+
+            if (user == null)
+                return NotFound();
+
             SignInResult result = await _signInManager.CheckPasswordSignInAsync(user, credentials.Password, true);
             if (result.Succeeded)
             {
