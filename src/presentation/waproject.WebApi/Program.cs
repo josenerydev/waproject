@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Serilog;
 
+using waproject.Application;
 using waproject.Data;
 using waproject.Data.Contexts;
 
@@ -23,6 +24,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog();
 
 // Add services to the container.
+builder.Services.AddApplication(configuration);
 builder.Services.AddInfrastructureData(configuration);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
