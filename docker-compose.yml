@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  waproject.webapi:
+    image: ${DOCKER_REGISTRY-}waprojectwebapi
+    build:
+      context: .
+      dockerfile: src/presentation/waproject.WebApi/Dockerfile
+    depends_on:
+      - mssql
+  
+  mssql:
+    build:
+      context: .
+      dockerfile: mssql/mssql.Dockerfile
+    restart: always
+    ports:
+      - "1440:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Password_01

@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 using Serilog;
 
 using waproject.Data;
@@ -51,6 +53,10 @@ try
     try
     {
         var context = services.GetRequiredService<ApplicationDbContext>();
+
+        if (context.Database.IsSqlServer())
+            await context.Database.MigrateAsync();
+
         await SeedData.InitializeAsync(context);
     }
     catch (Exception ex)
