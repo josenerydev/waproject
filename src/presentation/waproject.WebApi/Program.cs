@@ -50,21 +50,20 @@ try
 
     using var scope = app.Services.CreateScope();
     var services = scope.ServiceProvider;
-    try
+    if (!app.Environment.IsProduction())
     {
-        var context = services.GetRequiredService<ApplicationDbContext>();
-
-        if (context.Database.IsSqlServer())
+        try
+        {
+            var context = services.GetRequiredService<ApplicationDbContext>();
             await context.Database.MigrateAsync();
-
-        await SeedData.InitializeAsync(context);
-    }
-    catch (Exception ex)
-    {
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred seeding the DB.");
-
-        throw;
+            await SeedData.InitializeAsync(context);
+        }
+        catch (Exception ex)
+        {
+            var logger = services.GetRequiredService<ILogger<Program>>();
+            logger.LogError(ex, "An error occurred seeding the DB.");
+            throw;
+        }
     }
 
     await app.RunAsync();
