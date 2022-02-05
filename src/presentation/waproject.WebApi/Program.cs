@@ -1,3 +1,5 @@
+using Serilog;
+
 using waproject.Data;
 using waproject.Data.Contexts;
 
@@ -11,7 +13,12 @@ var configuration = new ConfigurationBuilder()
   .AddCommandLine(args)
   .Build();
 
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(configuration)
+    .CreateLogger();
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog();
 
 // Add services to the container.
 builder.Services.AddInfrastructureData(configuration);
@@ -35,9 +42,35 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-using var scope = app.Services.CreateScope();
-var services = scope.ServiceProvider;
-var context = services.GetRequiredService<ApplicationDbContext>();
-await SeedData.InitializeAsync(context);
+try
+{
+    Log.Information("Starting web host");
 
-app.Run();
+    using var scope = app.Services.CreateScope();
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<ApplicationDbContext>();
+        await SeedData.InitializeAsync(context);
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred seeding the DB.");
+
+        throw;
+    }
+
+    await app.RunAsync();
+    return 0;
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Host terminated unexpectedly");
+    return 1;
+}
+finally
+{
+    Log.CloseAndFlush();
+}
+

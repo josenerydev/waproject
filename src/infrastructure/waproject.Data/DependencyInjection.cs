@@ -10,9 +10,10 @@ namespace waproject.Data
     {
         public static IServiceCollection AddInfrastructureData(this IServiceCollection services, IConfiguration configuration)
         {
+            bool.TryParse(configuration.GetSection("EnableSensitiveDataLogging").Value, out bool enableSensitiveDataLogging);
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
-                    .EnableSensitiveDataLogging());
+                    .EnableSensitiveDataLogging(enableSensitiveDataLogging));
             return services;
         }
     }
