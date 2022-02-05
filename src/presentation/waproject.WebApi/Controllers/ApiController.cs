@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace waproject.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/api/[controller]")]
     public class ApiController : ControllerBase
     {
         private IMediator _mediator = default!;

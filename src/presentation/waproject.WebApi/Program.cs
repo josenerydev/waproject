@@ -5,6 +5,9 @@ using Serilog;
 using waproject.Application;
 using waproject.Data;
 using waproject.Data.Contexts;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var envName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
 var configuration = new ConfigurationBuilder()
@@ -26,10 +29,21 @@ builder.Host.UseSerilog();
 // Add services to the container.
 builder.Services.AddApplication(configuration);
 builder.Services.AddInfrastructureData(configuration);
+
+builder.Services.AddAuthentication()
+    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opts =>
+    {
+        opts.TokenValidationParameters.ValidateAudience = false;
+        opts.TokenValidationParameters.ValidateIssuer = false;
+        opts.TokenValidationParameters.IssuerSigningKey
+            = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["BearerTokens:Key"]));
+    });
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -40,8 +54,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(x =>
+{
+    x.AllowAnyOrigin();
+    x.AllowAnyHeader();
+    x.AllowAnyMethod();
+});
+
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
@@ -52,20 +74,19 @@ try
 
     using var scope = app.Services.CreateScope();
     var services = scope.ServiceProvider;
-    if (!app.Environment.IsProduction())
+
+    try
     {
-        try
-        {
-            var context = services.GetRequiredService<ApplicationDbContext>();
-            await context.Database.MigrateAsync();
+        var context = services.GetRequiredService<ApplicationDbContext>();
+        await context.Database.MigrateAsync();
+        if (!app.Environment.IsProduction())
             await SeedData.InitializeAsync(context);
-        }
-        catch (Exception ex)
-        {
-            var logger = services.GetRequiredService<ILogger<Program>>();
-            logger.LogError(ex, "An error occurred seeding the DB.");
-            throw;
-        }
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred seeding the DB.");
+        throw;
     }
 
     await app.RunAsync();
