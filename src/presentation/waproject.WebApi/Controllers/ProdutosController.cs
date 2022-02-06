@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-using waproject.Application.Dtos;
 using waproject.Application.Produtos.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using waproject.Application.Dtos.Produtos;
 
 namespace waproject.WebApi.Controllers
 {

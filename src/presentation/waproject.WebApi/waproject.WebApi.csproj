@@ -26,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\core\waproject.Application\waproject.Application.csproj" />
     <ProjectReference Include="..\..\infrastructure\waproject.Data\waproject.Data.csproj" />
+    <ProjectReference Include="..\..\infrastructure\waproject.Identity\waproject.Identity.csproj" />
     <ProjectReference Include="..\..\infrastructure\waproject.Shared\waproject.Shared.csproj" />
   </ItemGroup>
 

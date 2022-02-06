@@ -20,6 +20,7 @@ dotnet add reference ../waproject.Domain/waproject.Domain.csproj
 cd ../../infrastructure
 dotnet new classlib --name waproject.Data
 dotnet new classlib --name waproject.Shared
+dotnet new classlib --name waproject.Identity
 cd waproject.Data
 dotnet add reference ../../core/waproject.Domain/waproject.Domain.csproj
 dotnet add reference ../../core/waproject.Application/waproject.Application.csproj

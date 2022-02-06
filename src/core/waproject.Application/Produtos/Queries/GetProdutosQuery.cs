@@ -6,7 +6,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 using waproject.Application.Common.Interfaces;
-using waproject.Application.Dtos;
+using waproject.Application.Dtos.Produtos;
 
 namespace waproject.Application.Produtos.Queries
 {

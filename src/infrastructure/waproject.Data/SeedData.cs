@@ -1,19 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
-
-using waproject.Data.Contexts;
+﻿using waproject.Data.Contexts;
 using waproject.Domain.Entities;
 
 namespace waproject.Data
 {
     public static class SeedData
     {
-        public static async Task Initialize(IServiceProvider serviceProvider, ApplicationDbContext context)
+        public static async Task Initialize(ApplicationDbContext context)
         {
-            var userManager = serviceProvider.GetService<UserManager<IdentityUser>>();
-
-            await CreateUser(userManager!);
-
             var produto1 = new Produto
             {
                 Nome = "Motosserra à Gasolina",
@@ -158,24 +151,6 @@ namespace waproject.Data
             }
 
             await context.SaveChangesAsync();
-        }
-
-        private static async Task CreateUser(UserManager<IdentityUser> userManager)
-        {
-            var userName = "admin";
-            var userEmail = "admin@gmail.com";
-            var userPassword = "Pa$$w0rd";
-            var user = await userManager.FindByNameAsync(userName);
-
-            if (user == null)
-            {
-                user = new IdentityUser(userName)
-                {
-                    Email = userEmail,
-                    EmailConfirmed = true
-                };
-                await userManager.CreateAsync(user, userPassword);
-            }
         }
     }
 }

@@ -31,6 +31,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mssql", "mssql", "{A26F85E1
 		mssql\wait-for-it.sh = mssql\wait-for-it.sh
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "waproject.Identity", "src\infrastructure\waproject.Identity\waproject.Identity.csproj", "{3138FFE8-02DD-4E54-B8EA-3EB979CFE67E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{06FBFA8A-D5D1-4D03-AC7F-72E8BECA4605}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06FBFA8A-D5D1-4D03-AC7F-72E8BECA4605}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06FBFA8A-D5D1-4D03-AC7F-72E8BECA4605}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3138FFE8-02DD-4E54-B8EA-3EB979CFE67E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3138FFE8-02DD-4E54-B8EA-3EB979CFE67E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3138FFE8-02DD-4E54-B8EA-3EB979CFE67E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3138FFE8-02DD-4E54-B8EA-3EB979CFE67E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{96434DE9-4092-49A8-B538-4325F7DB0B8C} = {04A3A18A-7C20-4A2A-A08C-6D84FE338BC5}
 		{E144D55B-262F-45C1-8FAF-3BC074396D88} = {0A1C53E2-60C3-430D-8213-4F483200C9B3}
 		{BA095626-EAB5-4820-BA84-9D795DA47101} = {E144D55B-262F-45C1-8FAF-3BC074396D88}
+		{3138FFE8-02DD-4E54-B8EA-3EB979CFE67E} = {04A3A18A-7C20-4A2A-A08C-6D84FE338BC5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {808D78E3-1C9C-4B35-B49E-0801CD7CE1E1}
