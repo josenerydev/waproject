@@ -6,6 +6,8 @@ using Microsoft.OpenApi.Models;
 
 using System.Text;
 
+using waproject.WebApi.Helpers;
+
 namespace waproject.WebApi.Extensions
 {
     public static class ServicesExtensions
@@ -32,10 +34,12 @@ namespace waproject.WebApi.Extensions
         {
             services.AddSwaggerGen(config =>
             {
+                config.OperationFilter<SwaggerDefaultValues>();
+
                 config.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",
-                    Type = SecuritySchemeType.ApiKey,
+                    Type = SecuritySchemeType.Http,
                     Scheme = "Bearer",
                     BearerFormat = "JWT",
                     In = ParameterLocation.Header,

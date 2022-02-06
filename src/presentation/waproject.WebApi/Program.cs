@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 using Serilog;
+
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 using waproject.Application;
 using waproject.Data;
@@ -9,6 +12,7 @@ using waproject.Data.Contexts;
 using waproject.Identity;
 using waproject.Identity.Contexts;
 using waproject.WebApi.Extensions;
+using waproject.WebApi.Helpers;
 
 var envName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
 var configuration = new ConfigurationBuilder()
@@ -38,6 +42,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddApiVersioningExtension();
 builder.Services.AddVersionedApiExplorerExtension();
 builder.Services.AddSwaggerGenExtension();
+builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 builder.Services.AddCors();
 
 var app = builder.Build();
