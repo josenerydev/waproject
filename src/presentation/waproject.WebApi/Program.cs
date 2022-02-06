@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 
 using Serilog;
@@ -34,16 +35,19 @@ builder.Services.AddAuthenticationExtension(configuration);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddApiVersioningExtension();
+builder.Services.AddVersionedApiExplorerExtension();
 builder.Services.AddSwaggerGenExtension();
 builder.Services.AddCors();
 
 var app = builder.Build();
 
+var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerExtension(apiVersionDescriptionProvider);
 }
 
 app.UseCors(x =>

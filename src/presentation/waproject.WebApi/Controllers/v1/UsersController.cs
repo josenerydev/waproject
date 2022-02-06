@@ -3,7 +3,7 @@
 using waproject.Application.Common.Interfaces;
 using waproject.Application.Dtos.User;
 
-namespace waproject.WebApi.Controllers
+namespace waproject.WebApi.Controllers.v1
 {
     public class UsersController : ApiController
     {
@@ -16,7 +16,7 @@ namespace waproject.WebApi.Controllers
         {
             var response = await _userService.Authenticate(request);
 
-            if(response == null)
+            if (response == null)
                 return BadRequest(new { message = "Email or password is incorrect" });
 
             return Ok(response);

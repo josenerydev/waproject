@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using waproject.Application.Dtos.Produtos;
 
-namespace waproject.WebApi.Controllers
+namespace waproject.WebApi.Controllers.v1
 {
     public class ProdutosController : ApiController
     {
