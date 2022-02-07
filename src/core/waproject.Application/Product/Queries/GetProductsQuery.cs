@@ -10,11 +10,11 @@ using waproject.Application.Dtos.Products;
 
 namespace waproject.Application.Product.Queries
 {
-    public class GetProductQuery : IRequest<IList<ProductDto>>
+    public class GetProductsQuery : IRequest<IList<ProductDto>>
     {
     }
 
-    public class GetProdutosQueryHandler : IRequestHandler<GetProductQuery, IList<ProductDto>>
+    public class GetProdutosQueryHandler : IRequestHandler<GetProductsQuery, IList<ProductDto>>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -25,7 +25,7 @@ namespace waproject.Application.Product.Queries
             _mapper = mapper;
         }
 
-        public async Task<IList<ProductDto>> Handle(GetProductQuery request, CancellationToken cancellationToken)
+        public async Task<IList<ProductDto>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
         {
             var products = await _context.Products
                 .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)

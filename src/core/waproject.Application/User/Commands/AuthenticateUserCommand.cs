@@ -7,8 +7,14 @@ namespace waproject.Application.User.Commands
 {
     public class AuthenticateUserCommand : IRequest<AuthenticateDto>
     {
-        public string Email { get; set; } = default!;
-        public string Password { get; set; } = default!;
+        public string Email { get;  }
+        public string Password { get; set; }
+
+        public AuthenticateUserCommand(string email, string password)
+        {
+            Email = email;
+            Password = password;
+        }
     }
 
     public class AuthenticateUserCommandHandler : IRequestHandler<AuthenticateUserCommand, AuthenticateDto>
