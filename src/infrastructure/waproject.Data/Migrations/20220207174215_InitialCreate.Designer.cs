@@ -12,7 +12,7 @@ using waproject.Data.Contexts;
 namespace waproject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220206164155_InitialCreate")]
+    [Migration("20220207174215_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace waproject.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("waproject.Domain.Entities.Equipe", b =>
+            modelBuilder.Entity("waproject.Domain.Entities.Carrier", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,24 +32,24 @@ namespace waproject.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<string>("Descricao")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PlacaVeiculo")
+                    b.Property<string>("VehiclePlate")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Equipes");
+                    b.ToTable("Carriers");
                 });
 
-            modelBuilder.Entity("waproject.Domain.Entities.Pedido", b =>
+            modelBuilder.Entity("waproject.Domain.Entities.Order", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,31 +57,31 @@ namespace waproject.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("DataCriacao")
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("CarrierId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DataEntregaRealizada")
+                    b.Property<DateTime>("DeliveredAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Endereco")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("EquipeId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("NumeroIdentificacao")
+                    b.Property<string>("IdentificationNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EquipeId");
+                    b.HasIndex("CarrierId");
 
-                    b.ToTable("Pedidos");
+                    b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("waproject.Domain.Entities.PedidoItem", b =>
+            modelBuilder.Entity("waproject.Domain.Entities.OrderItem", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -89,22 +89,22 @@ namespace waproject.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<long>("PedidoId")
+                    b.Property<long>("OrderId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("ProdutoId")
+                    b.Property<long>("ProductId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PedidoId");
+                    b.HasIndex("OrderId");
 
-                    b.HasIndex("ProdutoId");
+                    b.HasIndex("ProductId");
 
-                    b.ToTable("PedidoItems");
+                    b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("waproject.Domain.Entities.Produto", b =>
+            modelBuilder.Entity("waproject.Domain.Entities.Product", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -112,56 +112,56 @@ namespace waproject.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<string>("Descricao")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Valor")
+                    b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Produtos");
+                    b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("waproject.Domain.Entities.Pedido", b =>
+            modelBuilder.Entity("waproject.Domain.Entities.Order", b =>
                 {
-                    b.HasOne("waproject.Domain.Entities.Equipe", null)
-                        .WithMany("Pedidos")
-                        .HasForeignKey("EquipeId");
+                    b.HasOne("waproject.Domain.Entities.Carrier", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("CarrierId");
                 });
 
-            modelBuilder.Entity("waproject.Domain.Entities.PedidoItem", b =>
+            modelBuilder.Entity("waproject.Domain.Entities.OrderItem", b =>
                 {
-                    b.HasOne("waproject.Domain.Entities.Pedido", "Pedido")
-                        .WithMany("PedidoItems")
-                        .HasForeignKey("PedidoId")
+                    b.HasOne("waproject.Domain.Entities.Order", "Order")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("waproject.Domain.Entities.Produto", "Produto")
+                    b.HasOne("waproject.Domain.Entities.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProdutoId")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Pedido");
+                    b.Navigation("Order");
 
-                    b.Navigation("Produto");
+                    b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("waproject.Domain.Entities.Equipe", b =>
+            modelBuilder.Entity("waproject.Domain.Entities.Carrier", b =>
                 {
-                    b.Navigation("Pedidos");
+                    b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("waproject.Domain.Entities.Pedido", b =>
+            modelBuilder.Entity("waproject.Domain.Entities.Order", b =>
                 {
-                    b.Navigation("PedidoItems");
+                    b.Navigation("OrderDetails");
                 });
 #pragma warning restore 612, 618
         }

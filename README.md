@@ -2,8 +2,8 @@ Run Migrations
 - Set as Startup Project WebApi
 - Package Manager Console => Default project waproject.Data
 - Add-Migration InitialCreate -Context ApplicationDbContext
-- Package Manager Console => Default project waproject.Data
-- Add-Migration InitialCreate -Context AuthDbContext
+- Package Manager Console => Default project waproject.Identity
+- Add-Migration InitialCreate -Context IdentityApplicationDbContext
 - Update-Database Or start the application with docker-compose
 
 

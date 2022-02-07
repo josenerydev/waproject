@@ -12,10 +12,10 @@ namespace waproject.Data.Contexts
         {
         }
 
-        public DbSet<Equipe> Equipes { get; set; } = default!;
-        public DbSet<Pedido> Pedidos { get; set; } = default!;
-        public DbSet<PedidoItem> PedidoItems { get; set; } = default!;
-        public DbSet<Produto> Produtos { get; set; } = default!;
+        public DbSet<Carrier> Carriers { get; set; } = default!;
+        public DbSet<Order> Orders { get; set; } = default!;
+        public DbSet<OrderItem> OrderItems { get; set; } = default!;
+        public DbSet<Product> Products { get; set; } = default!;
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

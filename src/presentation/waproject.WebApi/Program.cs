@@ -12,6 +12,7 @@ using waproject.Data;
 using waproject.Data.Contexts;
 using waproject.Identity;
 using waproject.Identity.Contexts;
+using waproject.Shared;
 using waproject.WebApi.Extensions;
 using waproject.WebApi.Filters;
 using waproject.WebApi.Helpers;
@@ -36,9 +37,10 @@ builder.Host.UseSerilog();
 // Add services to the container.
 builder.Services.AddApplication(configuration);
 builder.Services.AddInfrastructureData(configuration);
+builder.Services.AddInfrastructureShared();
 builder.Services.AddInfrastructureIdentity(configuration);
-builder.Services.AddAuthenticationExtension(configuration);
 
+builder.Services.AddAuthenticationExtension(configuration);
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers(options =>
     options.Filters.Add(new ApiExceptionFilter()));
@@ -88,7 +90,7 @@ try
     try
     {
         var appContext = services.GetRequiredService<ApplicationDbContext>();
-        var authContext = services.GetRequiredService<AuthDbContext>();
+        var authContext = services.GetRequiredService<IdentityApplicationDbContext>();
         await appContext.Database.MigrateAsync();
         await authContext.Database.MigrateAsync();
         if (!app.Environment.IsProduction())

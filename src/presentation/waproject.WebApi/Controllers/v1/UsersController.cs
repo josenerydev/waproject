@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-using waproject.Application.Users.Commands;
+using waproject.Application.User.Commands;
 
 namespace waproject.WebApi.Controllers.v1
 {

@@ -15,12 +15,12 @@ namespace waproject.Identity
         public static IServiceCollection AddInfrastructureIdentity(this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.AddDbContext<AuthDbContext>(options =>
+            services.AddDbContext<IdentityApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
                 options.SignIn.RequireConfirmedAccount = false)
-                    .AddEntityFrameworkStores<AuthDbContext>()
+                    .AddEntityFrameworkStores<IdentityApplicationDbContext>()
                     .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>

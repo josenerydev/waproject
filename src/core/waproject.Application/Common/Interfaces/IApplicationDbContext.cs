@@ -6,10 +6,10 @@ namespace waproject.Application.Common.Interfaces
 {
     public interface IApplicationDbContext
     {
-        DbSet<Equipe> Equipes { get; set; }
-        DbSet<Pedido> Pedidos { get; set; }
-        DbSet<PedidoItem> PedidoItems { get; set; }
-        DbSet<Produto> Produtos { get; set; }
+        DbSet<Carrier> Carriers { get; set; }
+        DbSet<Order> Orders { get; set; }
+        DbSet<OrderItem> OrderItems { get; set; }
+        DbSet<Domain.Entities.Product> Products { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

@@ -1,10 +1,10 @@
 ﻿namespace waproject.Application.Dtos.Users
 {
-    public class AuthenticateResponse
+    public class AuthenticateDto
     {
         public string Token { get; }
 
-        public AuthenticateResponse(string token)
+        public AuthenticateDto(string token)
         {
             Token = token;
         }

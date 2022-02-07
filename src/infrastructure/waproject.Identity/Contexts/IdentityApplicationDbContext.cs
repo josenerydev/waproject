@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace waproject.Identity.Contexts
 {
-    public class AuthDbContext : IdentityDbContext
+    public class IdentityApplicationDbContext : IdentityDbContext
     {
-        public AuthDbContext(DbContextOptions<AuthDbContext> options)
+        public IdentityApplicationDbContext(DbContextOptions<IdentityApplicationDbContext> options)
             : base(options)
         {
         }

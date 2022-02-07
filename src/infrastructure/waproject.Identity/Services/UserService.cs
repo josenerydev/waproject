@@ -7,7 +7,7 @@ using System.Text;
 
 using waproject.Application.Common.Interfaces;
 using waproject.Application.Dtos.Users;
-using waproject.Application.Users.Commands;
+using waproject.Application.User.Commands;
 using waproject.Identity.Helpers;
 
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
@@ -27,7 +27,7 @@ namespace waproject.Identity.Services
             _userManager = userManager;
         }
 
-        public async Task<AuthenticateResponse> Authenticate(AuthenticateUserCommand request)
+        public async Task<AuthenticateDto> Authenticate(AuthenticateUserCommand request)
         {
             IdentityUser user = await _userManager.FindByEmailAsync(request.Email);
 
@@ -36,7 +36,7 @@ namespace waproject.Identity.Services
 
             SignInResult result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, true);
             if (result.Succeeded)
-                return new AuthenticateResponse(await GenerateJwtToken(user));
+                return new AuthenticateDto(await GenerateJwtToken(user));
 
             return null!;
         }

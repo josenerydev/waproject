@@ -6,15 +6,15 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 using waproject.Application.Common.Interfaces;
-using waproject.Application.Dtos.Produtos;
+using waproject.Application.Dtos.Products;
 
-namespace waproject.Application.Produtos.Queries
+namespace waproject.Application.Product.Queries
 {
-    public class GetProdutosQuery : IRequest<IList<ProdutoDto>>
+    public class GetProductQuery : IRequest<IList<ProductDto>>
     {
     }
 
-    public class GetProdutosQueryHandler : IRequestHandler<GetProdutosQuery, IList<ProdutoDto>>
+    public class GetProdutosQueryHandler : IRequestHandler<GetProductQuery, IList<ProductDto>>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -25,13 +25,13 @@ namespace waproject.Application.Produtos.Queries
             _mapper = mapper;
         }
 
-        public async Task<IList<ProdutoDto>> Handle(GetProdutosQuery request, CancellationToken cancellationToken)
+        public async Task<IList<ProductDto>> Handle(GetProductQuery request, CancellationToken cancellationToken)
         {
-            var produtos = await _context.Produtos
-                .ProjectTo<ProdutoDto>(_mapper.ConfigurationProvider)
+            var products = await _context.Products
+                .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 
-            return produtos;
+            return products;
         }
     }
 }

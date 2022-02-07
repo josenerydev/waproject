@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace waproject.Application.Produtos.Commands.CreateProduto
+namespace waproject.Application.Product.Commands.CreateProduct
 {
-    public class CreateProdutoCommand
+    public class CreateProductCommandValidator
     {
     }
 }

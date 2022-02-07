@@ -5,9 +5,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Equipes\" />
-    <Folder Include="PedidoItens\" />
-    <Folder Include="Pedidos\" />
+    <Folder Include="Carrier\" />
+    <Folder Include="OrderItem\" />
+    <Folder Include="Order\" />
   </ItemGroup>
 
   <ItemGroup>

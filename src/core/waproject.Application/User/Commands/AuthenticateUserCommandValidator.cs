@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
 
-namespace waproject.Application.Users.Commands
+namespace waproject.Application.User.Commands
 {
     public class AuthenticateUserCommandValidator : AbstractValidator<AuthenticateUserCommand>
     {

@@ -7,144 +7,144 @@ namespace waproject.Data
     {
         public static async Task Initialize(ApplicationDbContext context)
         {
-            var produto1 = new Produto
+            var produto1 = new Product
             {
-                Nome = "Motosserra à Gasolina",
-                Descricao = "Projetada para oferecer o melhor rendimento nos trabalhos mais intensos, a motosserra é ergonômica, movida a gasolina e com baixo peso atendendo as necessidades das mais variadas aplicações, sendo indicada para podas, corte de árvores de médio porte, reflorestamentos, desgalhamentos e trabalhos intensos e contínuos.",
-                Valor = 1299.90M
+                Name = "Motosserra à Gasolina",
+                Description = "Projetada para oferecer o melhor rendimento nos trabalhos mais intensos, a motosserra é ergonômica, movida a gasolina e com baixo peso atendendo as necessidades das mais variadas aplicações, sendo indicada para podas, corte de árvores de médio porte, reflorestamentos, desgalhamentos e trabalhos intensos e contínuos.",
+                Price = 1299.90M
             };
 
-            var produto2 = new Produto
+            var produto2 = new Product
             {
-                Nome = "Jogo de Ferramentas Profissionais com 150 Peças e Maleta",
-                Descricao = "Jogo de ferramentas produzido em cromo vanádio, proporcionando qualidade e durabilidade.",
-                Valor = 799.90M
+                Name = "Jogo de Ferramentas Profissionais com 150 Peças e Maleta",
+                Description = "Jogo de ferramentas produzido em cromo vanádio, proporcionando qualidade e durabilidade.",
+                Price = 799.90M
             };
 
-            var produto3 = new Produto
+            var produto3 = new Product
             {
-                Nome = "Jogo 100 peças Chaves de Fenda/ Phillips e Bits",
-                Descricao = "O Jogo com 100 peças de Chaves de Fenda e Phillips FORTG PRO FG8193 é composto por 23 chaves de fenda/phillips, 01 chave com catraca, 02 chaves offset, 08 chaves de precisão, 06 bits soquetes e 60 bits de 25mm.",
-                Valor = 189.90M
+                Name = "Jogo 100 peças Chaves de Fenda/ Phillips e Bits",
+                Description = "O Jogo com 100 peças de Chaves de Fenda e Phillips FORTG PRO FG8193 é composto por 23 chaves de fenda/phillips, 01 chave com catraca, 02 chaves offset, 08 chaves de precisão, 06 bits soquetes e 60 bits de 25mm.",
+                Price = 189.90M
             };
 
-            var pedido1 = new Pedido
+            var pedido1 = new Order
             {
-                DataCriacao = DateTime.Now,
-                DataEntregaRealizada = DateTime.Now.AddDays(2),
-                Endereco = "Avenida Alagoas, 1193, Jardim Paulista - Franca-SP",
-                NumeroIdentificacao = "29b99d08-0a36-4d01-90d0-74039715f689",
+                CreatedAt = DateTime.Now,
+                DeliveredAt = DateTime.Now.AddDays(2),
+                Address = "Avenida Alagoas, 1193, Jardim Paulista - Franca-SP",
+                IdentificationNumber = "29b99d08-0a36-4d01-90d0-74039715f689",
             };
 
-            var pedido2 = new Pedido
+            var pedido2 = new Order
             {
-                DataCriacao = DateTime.Now.AddDays(-2),
-                DataEntregaRealizada = DateTime.Now.AddDays(4),
-                Endereco = "R. Espírito Santo, 497 - Centro, Juiz de Fora - MG",
-                NumeroIdentificacao = "7b36a442-421f-4b02-bca2-34e9c7c75857",
+                CreatedAt = DateTime.Now.AddDays(-2),
+                DeliveredAt = DateTime.Now.AddDays(4),
+                Address = "R. Espírito Santo, 497 - Centro, Juiz de Fora - MG",
+                IdentificationNumber = "7b36a442-421f-4b02-bca2-34e9c7c75857",
             };
 
-            var pedido3 = new Pedido
+            var pedido3 = new Order
             {
-                DataCriacao = DateTime.Now.AddDays(3),
-                DataEntregaRealizada = DateTime.Now.AddDays(8),
-                Endereco = "Av. Barão do Rio Branco, 2572 - Centro, Juiz de Fora - MG",
-                NumeroIdentificacao = "6ad01cd6-d25c-4f0c-943f-3a1be34246df",
+                CreatedAt = DateTime.Now.AddDays(3),
+                DeliveredAt = DateTime.Now.AddDays(8),
+                Address = "Av. Barão do Rio Branco, 2572 - Centro, Juiz de Fora - MG",
+                IdentificationNumber = "6ad01cd6-d25c-4f0c-943f-3a1be34246df",
             };
 
-            var pedidoItem1 = new List<PedidoItem>
+            var pedidoItem1 = new List<OrderItem>
             {
-                new PedidoItem
+                new OrderItem
                 {
-                    Pedido = pedido1,
-                    Produto = produto1
+                    Order = pedido1,
+                    Product = produto1
                 },
-                new PedidoItem
+                new OrderItem
                 {
-                    Pedido = pedido1,
-                    Produto = produto2
+                    Order = pedido1,
+                    Product = produto2
                 },
             };
 
-            var pedidoItem2 = new List<PedidoItem>
+            var pedidoItem2 = new List<OrderItem>
             {
-                new PedidoItem
+                new OrderItem
                 {
-                    Pedido = pedido2,
-                    Produto = produto3
+                    Order = pedido2,
+                    Product = produto3
                 }
             };
 
-            var pedidoItem3 = new List<PedidoItem>
+            var pedidoItem3 = new List<OrderItem>
             {
-                new PedidoItem
+                new OrderItem
                 {
-                    Pedido = pedido3,
-                    Produto = produto1
+                    Order = pedido3,
+                    Product = produto1
                 },
-                new PedidoItem
+                new OrderItem
                 {
-                    Pedido = pedido3,
-                    Produto = produto2
+                    Order = pedido3,
+                    Product = produto2
                 },
-                new PedidoItem
+                new OrderItem
                 {
-                    Pedido = pedido3,
-                    Produto = produto3
+                    Order = pedido3,
+                    Product = produto3
                 }
             };
 
-            var equipe1 = new Equipe
+            var equipe1 = new Carrier
             {
-                Nome = "Sedex",
-                Descricao = "O SEDEX é um serviço da Empresa Brasileira de Correios e Telégrafos de despacho expresso de documentos e encomendas.",
-                PlacaVeiculo = "KAZ-3700",
-                Pedidos = new List<Pedido>
+                Name = "Sedex",
+                Description = "O SEDEX é um serviço da Empresa Brasileira de Correios e Telégrafos de despacho expresso de documentos e encomendas.",
+                VehiclePlate = "KAZ-3700",
+                Orders = new List<Order>
                 {
                     pedido2,
                     pedido3
                 }
             };
 
-            var equipe2 = new Equipe
+            var equipe2 = new Carrier
             {
-                Nome = "Azul Cargo",
-                Descricao = "A Azul Cargo é um serviço de logística pertencente à Azul Linhas Aéreas Brasileiras, que opera desde 2009 garantindo pontualidade, eficiência e qualidade no transporte de encomendas.",
-                PlacaVeiculo = "JST-3285",
-                Pedidos = new List<Pedido>
+                Name = "Azul Cargo",
+                Description = "A Azul Cargo é um serviço de logística pertencente à Azul Linhas Aéreas Brasileiras, que opera desde 2009 garantindo pontualidade, eficiência e qualidade no transporte de encomendas.",
+                VehiclePlate = "JST-3285",
+                Orders = new List<Order>
                 {
                     pedido1
                 }
             };
 
-            if (!context.Produtos.Any())
+            if (!context.Products.Any())
             {
-                await context.Produtos.AddRangeAsync(
+                await context.Products.AddRangeAsync(
                     produto1,
                     produto2,
                     produto3
                 );
             }
 
-            if (!context.Pedidos.Any())
+            if (!context.Orders.Any())
             {
-                await context.Pedidos.AddRangeAsync(
+                await context.Orders.AddRangeAsync(
                     pedido1,
                     pedido2,
                     pedido3
                 );
             }
 
-            if (!context.PedidoItems.Any())
+            if (!context.OrderItems.Any())
             {
-                await context.PedidoItems.AddRangeAsync(pedidoItem1);
-                await context.PedidoItems.AddRangeAsync(pedidoItem2);
-                await context.PedidoItems.AddRangeAsync(pedidoItem3);
+                await context.OrderItems.AddRangeAsync(pedidoItem1);
+                await context.OrderItems.AddRangeAsync(pedidoItem2);
+                await context.OrderItems.AddRangeAsync(pedidoItem3);
             }
 
-            if (!context.Equipes.Any())
+            if (!context.Carriers.Any())
             {
-                await context.Equipes.AddRangeAsync(
+                await context.Carriers.AddRangeAsync(
                     equipe1,
                     equipe2
                 );
