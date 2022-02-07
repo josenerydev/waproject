@@ -44,11 +44,14 @@ builder.Services.AddControllers(options =>
     options.Filters.Add(new ApiExceptionFilter()));
 builder.Services.Configure<ApiBehaviorOptions>(options =>
     options.SuppressModelStateInvalidFilter = true);
+
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddApiVersioningExtension();
 builder.Services.AddVersionedApiExplorerExtension();
 builder.Services.AddSwaggerGenExtension();
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+
 builder.Services.AddCors();
 
 var app = builder.Build();

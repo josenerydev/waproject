@@ -1,20 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-using waproject.Application.Common.Interfaces;
-using waproject.Application.Dtos.User;
+using waproject.Application.Users.Commands;
 
 namespace waproject.WebApi.Controllers.v1
 {
     public class UsersController : ApiController
     {
-        private readonly IUserService _userService;
-
-        public UsersController(IUserService userService) => _userService = userService;
-
         [HttpPost("auth")]
-        public async Task<IActionResult> Authenticate(AuthenticateRequest request)
+        public async Task<IActionResult> Authenticate([FromBody] AuthenticateUserCommand command)
         {
-            var response = await _userService.Authenticate(request);
+            var response = await Mediator.Send(command);
 
             if (response == null)
                 return BadRequest(new { message = "Email or password is incorrect" });

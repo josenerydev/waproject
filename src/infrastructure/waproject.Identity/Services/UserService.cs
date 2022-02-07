@@ -6,7 +6,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
 using waproject.Application.Common.Interfaces;
-using waproject.Application.Dtos.User;
+using waproject.Application.Dtos.Users;
+using waproject.Application.Users.Commands;
 using waproject.Identity.Helpers;
 
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
@@ -26,7 +27,7 @@ namespace waproject.Identity.Services
             _userManager = userManager;
         }
 
-        public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
+        public async Task<AuthenticateResponse> Authenticate(AuthenticateUserCommand request)
         {
             IdentityUser user = await _userManager.FindByEmailAsync(request.Email);
 

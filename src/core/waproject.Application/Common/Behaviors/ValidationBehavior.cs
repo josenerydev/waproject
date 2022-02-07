@@ -2,17 +2,22 @@
 
 using MediatR;
 
+using ValidationException = waproject.Application.Common.Exceptions.ValidationException;
+
 namespace waproject.Application.Common.Behaviors
 {
     public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : IRequest<TResponse>
+         where TRequest : IRequest<TResponse>
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
 
         public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
-            => _validators = validators;
+        {
+            _validators = validators;
+        }
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
+            RequestHandlerDelegate<TResponse> next)
         {
             if (!_validators.Any()) return await next();
 

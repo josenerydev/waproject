@@ -1,4 +1,4 @@
-﻿namespace waproject.Application.Dtos.User
+﻿namespace waproject.Application.Dtos.Users
 {
     public class AuthenticateResponse
     {
