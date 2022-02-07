@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -12,6 +13,7 @@ using waproject.Data.Contexts;
 using waproject.Identity;
 using waproject.Identity.Contexts;
 using waproject.WebApi.Extensions;
+using waproject.WebApi.Filters;
 using waproject.WebApi.Helpers;
 
 var envName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
@@ -37,7 +39,11 @@ builder.Services.AddInfrastructureData(configuration);
 builder.Services.AddInfrastructureIdentity(configuration);
 builder.Services.AddAuthenticationExtension(configuration);
 
-builder.Services.AddControllers();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddControllers(options =>
+    options.Filters.Add(new ApiExceptionFilter()));
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+    options.SuppressModelStateInvalidFilter = true);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddApiVersioningExtension();
 builder.Services.AddVersionedApiExplorerExtension();

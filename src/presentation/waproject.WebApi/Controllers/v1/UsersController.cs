@@ -12,7 +12,7 @@ namespace waproject.WebApi.Controllers.v1
         public UsersController(IUserService userService) => _userService = userService;
 
         [HttpPost("auth")]
-        public async Task<IActionResult> Authenticate([FromBody] AuthenticateRequest request)
+        public async Task<IActionResult> Authenticate(AuthenticateRequest request)
         {
             var response = await _userService.Authenticate(request);
 
