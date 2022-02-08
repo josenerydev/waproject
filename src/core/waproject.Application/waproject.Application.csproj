@@ -7,7 +7,6 @@
   <ItemGroup>
     <Folder Include="Carrier\" />
     <Folder Include="OrderItem\" />
-    <Folder Include="Order\" />
   </ItemGroup>
 
   <ItemGroup>
