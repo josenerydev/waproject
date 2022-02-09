@@ -3,7 +3,7 @@ Run Migrations
 - Package Manager Console => Default project waproject.Data
 - Add-Migration InitialCreate -Context ApplicationDbContext
 - Package Manager Console => Default project waproject.Identity
-- Add-Migration InitialCreate -Context IdentityApplicationDbContext
+- Add-Migration InitialCreate -Context AppIdentityDbContext
 - Update-Database Or start the application with docker-compose
 
 

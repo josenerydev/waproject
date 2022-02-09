@@ -12,7 +12,7 @@ using waproject.Data.Contexts;
 namespace waproject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220207174215_InitialCreate")]
+    [Migration("20220209004330_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

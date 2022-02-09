@@ -89,14 +89,14 @@ try
 
     try
     {
-        var appContext = services.GetRequiredService<ApplicationDbContext>();
-        var authContext = services.GetRequiredService<IdentityApplicationDbContext>();
-        await appContext.Database.MigrateAsync();
-        await authContext.Database.MigrateAsync();
+        var applicationDbContext = services.GetRequiredService<ApplicationDbContext>();
+        var appIdentityDbContext = services.GetRequiredService<AppIdentityDbContext>();
+        await applicationDbContext.Database.MigrateAsync();
+        await appIdentityDbContext.Database.MigrateAsync();
         if (!app.Environment.IsProduction())
         {
-            await waproject.Data.SeedData.Initialize(appContext);
-            await waproject.Identity.SeedData.Initialize(services);
+            await waproject.Data.SeedData.Initialize(services);
+            await waproject.Identity.IdentitySeedData.Initialize(services);
         }
     }
     catch (Exception ex)

@@ -3,7 +3,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using waproject.Identity.Contexts;
 
@@ -11,11 +10,10 @@ using waproject.Identity.Contexts;
 
 namespace waproject.Identity.Migrations
 {
-    [DbContext(typeof(IdentityApplicationDbContext))]
-    [Migration("20220207174259_InitialCreate")]
-    partial class InitialCreate
+    [DbContext(typeof(AppIdentityDbContext))]
+    partial class AppIdentityDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

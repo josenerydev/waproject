@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace waproject.Identity.Contexts
 {
-    public class IdentityApplicationDbContext : IdentityDbContext
+    public class AppIdentityDbContext : IdentityDbContext
     {
-        public IdentityApplicationDbContext(DbContextOptions<IdentityApplicationDbContext> options)
+        public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options)
             : base(options)
         {
         }

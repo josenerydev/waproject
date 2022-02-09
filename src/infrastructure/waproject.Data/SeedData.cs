@@ -1,16 +1,17 @@
 ﻿using Bogus;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using waproject.Data.Contexts;
 using waproject.Domain.Entities;
 
 namespace waproject.Data
 {
-
-
     public static class SeedData
     {
-        public static async Task Initialize(ApplicationDbContext context)
+        public static async Task Initialize(IServiceProvider services)
         {
+            ApplicationDbContext context = services.GetRequiredService<ApplicationDbContext>();
             int carrierNumber = 10;
 
             List<Carrier> carries = new();
