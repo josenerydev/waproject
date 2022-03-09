@@ -9,3 +9,6 @@ Run Migrations
 
 ## Patterns
 - https://docs.microsoft.com/pt-br/aspnet/core/fundamentals/configuration/options?view=aspnetcore-6.0
+
+## Nuget Package
+- https://github.com/bchavez/Bogus
